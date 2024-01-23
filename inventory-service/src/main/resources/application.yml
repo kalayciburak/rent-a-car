@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    username: root
+    password: 12345
+    url: jdbc:mysql://localhost:3301/inventorydb?createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  servlet:
+    context-path: /api/inventory-service
+
+# Graylog configuration
+graylog:
+  host: 127.0.0.1
+  port: 12201

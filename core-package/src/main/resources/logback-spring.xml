@@ -9,22 +9,10 @@
         </encoder>
     </appender>
 
-    <appender name="ERROR_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/${springAppName}_%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>3GB</totalSizeCap>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
     <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
         <graylogHost>${graylogHost}</graylogHost>
         <graylogPort>${graylogPort}</graylogPort>
         <maxChunkSize>508</maxChunkSize>
-        <useCompression>true</useCompression>
         <encoder class="de.siegmar.logbackgelf.GelfEncoder">
             <originHost>127.0.0.1</originHost>
             <includeRawMessage>false</includeRawMessage>
@@ -51,12 +39,11 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="tr.com.kalayciburak.corepackage.aspect.ExceptionLoggingAspect" level="ERROR">
-        <appender-ref ref="ERROR_LOG_FILE"/>
+    <logger name="com.kalayciburak.corepackage.aspect.ExceptionLoggingAspect" level="ERROR">
         <appender-ref ref="GELF"/>
     </logger>
 
-    <logger name="tr.com.kalayciburak.corepackage.filter.LoggingFilter" level="DEBUG">
+    <logger name="com.kalayciburak.corepackage.filter.LoggingFilter" level="DEBUG">
         <appender-ref ref="GELF"/>
     </logger>
 </configuration>

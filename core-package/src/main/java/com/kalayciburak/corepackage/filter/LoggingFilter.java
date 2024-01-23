@@ -1,6 +1,8 @@
 package com.kalayciburak.corepackage.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kalayciburak.corepackage.advice.exception.CustomRuntimeException;
+import com.kalayciburak.corepackage.util.constant.ExceptionCodes;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,7 +52,7 @@ public class LoggingFilter extends OncePerRequestFilter {
         try {
             return new String(contentAsByteArray, characterEncoding);
         } catch (UnsupportedEncodingException e) {
-            throw new PmtRuntimeException(ExceptionCodes.UNSUPPORTED_ENCODING, e.getMessage());
+            throw new CustomRuntimeException(ExceptionCodes.UNSUPPORTED_ENCODING, e.getMessage());
         }
     }
 
@@ -58,8 +60,8 @@ public class LoggingFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
-        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+        var requestWrapper = new ContentCachingRequestWrapper(request);
+        var responseWrapper = new ContentCachingResponseWrapper(response);
 
         long startTime = System.currentTimeMillis();
         filterChain.doFilter(requestWrapper, responseWrapper);

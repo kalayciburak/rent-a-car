@@ -1,0 +1,64 @@
+version: '3'
+services:
+
+  # ? Database Configuration
+  inventorydb:
+    container_name: inventorydb
+    image: mysql
+    ports:
+      - "3301:3301"
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_TCP_PORT=3301
+      - VIRTUAL_PORT=3301
+    volumes:
+      - inventorydb:/data/db
+
+  # ? Graylog Configuration
+  # MongoDB: Graylog'un metadata ve konfigürasyon bilgisi için kullandığı veritabanı
+  mongo:
+    image: mongo:5.0.13
+    networks:
+      - graylog
+
+  # Elasticsearch: Graylog'un logları depoladığı ve arama yaptığı ana veritabanı
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - graylog
+
+  # Graylog: Merkezi log yönetimi sistemi
+  graylog:
+    image: graylog/graylog:5.0
+    environment:
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET}
+      - GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_ROOT_PASSWORD_SHA2}
+    networks:
+      - graylog
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+
+
+# ? Volumes
+volumes:
+  inventorydb:
+    driver: local
+
+# ? Networks
+networks:
+  graylog:
+    driver: bridge

@@ -2,7 +2,7 @@ package com.kalayciburak.inventoryservice.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kalayciburak.corepackage.model.entity.BaseEntity;
+import com.kalayciburak.commonpackage.model.entity.BaseEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLRestriction;
 

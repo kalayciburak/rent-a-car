@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice.model.entity;
 
-import com.kalayciburak.corepackage.model.entity.ReferenceEntity;
+import com.kalayciburak.commonpackage.model.entity.ReferenceEntity;
 import jakarta.persistence.*;
 
 import java.util.List;

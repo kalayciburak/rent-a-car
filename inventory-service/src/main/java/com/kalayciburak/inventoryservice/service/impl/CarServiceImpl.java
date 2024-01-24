@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice.service.impl;
 
-import com.kalayciburak.corepackage.model.response.ResponseItem;
+import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.response.CarResponse;
 import com.kalayciburak.inventoryservice.repository.CarRepository;
 import com.kalayciburak.inventoryservice.service.CarService;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.kalayciburak.corepackage.model.response.GenericResponse.createSuccessResponse;
+import static com.kalayciburak.commonpackage.model.response.GenericResponse.createSuccessResponse;
 
 @Service
 @RequiredArgsConstructor

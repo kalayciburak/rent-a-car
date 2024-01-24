@@ -3,6 +3,7 @@ package com.kalayciburak.inventoryservice.model.dto.response;
 public record CarResponse(
         Long id,
         int year,
+        double dailyPrice,
         String plate,
         String color,
         String fuel,

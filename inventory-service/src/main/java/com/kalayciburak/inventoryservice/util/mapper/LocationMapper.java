@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice.util.mapper;
 
-import com.kalayciburak.corepackage.util.mapper.BaseMapper;
+import com.kalayciburak.commonpackage.util.mapper.BaseMapper;
 import com.kalayciburak.inventoryservice.model.dto.response.LocationResponse;
 import com.kalayciburak.inventoryservice.model.entity.Location;
 import org.mapstruct.Mapper;

@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice;
 
-import com.kalayciburak.corepackage.util.constant.Paths;
+import com.kalayciburak.commonpackage.util.constant.Paths;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

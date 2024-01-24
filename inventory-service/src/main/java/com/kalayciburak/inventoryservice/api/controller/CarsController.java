@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice.api.controller;
 
-import com.kalayciburak.corepackage.model.response.ResponseItem;
+import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.response.CarResponse;
 import com.kalayciburak.inventoryservice.service.CarService;
 import lombok.RequiredArgsConstructor;

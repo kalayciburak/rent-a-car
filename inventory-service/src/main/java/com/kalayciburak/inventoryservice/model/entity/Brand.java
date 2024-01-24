@@ -1,6 +1,6 @@
 package com.kalayciburak.inventoryservice.model.entity;
 
-import com.kalayciburak.corepackage.model.entity.BaseEntity;
+import com.kalayciburak.commonpackage.model.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

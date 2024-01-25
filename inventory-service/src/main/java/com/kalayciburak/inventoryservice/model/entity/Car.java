@@ -1,7 +1,6 @@
 package com.kalayciburak.inventoryservice.model.entity;
 
 import com.kalayciburak.commonpackage.model.entity.BaseEntity;
-import com.kalayciburak.inventoryservice.model.enums.CarStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,10 +21,6 @@ public class Car extends BaseEntity {
     @Column(name = "daily_price")
     private double dailyPrice;
 
-    @Column(name = "car_status")
-    @Enumerated(EnumType.STRING)
-    private CarStatus carStatus;
-
     @ManyToOne
     @JoinColumn(name = "model_id")
     private Model model;
@@ -45,4 +40,8 @@ public class Car extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "color_type_id")
     private Lookup colorType;
+
+    @ManyToOne
+    @JoinColumn(name = "car_status_id")
+    private Lookup carStatus;
 }

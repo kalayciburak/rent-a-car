@@ -12,10 +12,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>common-config</name>
+    <description>Tüm mikro servisler için ortak (common/parent pom.xml) yapılandırma.</description>
     <properties>
         <java.version>21</java.version>
         <lombok.version>1.18.30</lombok.version>
-        <querydsl.version>5.0.0</querydsl.version>
         <logback-gelf.version>5.0.1</logback-gelf.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
@@ -114,24 +114,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-                <version>${apt-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
+                <!-- * Bu plugin sayesinde lombok, mapstruct dan önce çalışıyor ve mapstruct için gerekli olan getter, setter, constructor gibi kodları oluşturuyor. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

@@ -5,10 +5,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "brands")
 @SQLRestriction("is_active=true")
@@ -18,20 +22,4 @@ public class Brand extends BaseEntity {
 
     @OneToMany(mappedBy = "brand")
     private List<Model> models;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Model> getModels() {
-        return models;
-    }
-
-    public void setModels(List<Model> models) {
-        this.models = models;
-    }
 }

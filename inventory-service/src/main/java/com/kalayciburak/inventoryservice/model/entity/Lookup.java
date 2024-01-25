@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.kalayciburak.commonpackage.model.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "lookups")
 @SQLRestriction("is_active=true")
@@ -27,36 +31,4 @@ public class Lookup extends BaseEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "parent")
     private List<Lookup> children = new ArrayList<>();
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public Lookup getParent() {
-        return parent;
-    }
-
-    public void setParent(Lookup parent) {
-        this.parent = parent;
-    }
-
-    public List<Lookup> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Lookup> children) {
-        this.children = children;
-    }
 }

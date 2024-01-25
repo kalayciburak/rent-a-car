@@ -15,4 +15,5 @@ public class ExceptionCodes {
     public static final String FEIGN = "2000";
     public static final String CONNECTION_REFUSED = "2100";
     public static final String PREDICATE_BUILD = "2200";
+    public static final String CAR_NOT_AVAILABLE = "2300";
 }

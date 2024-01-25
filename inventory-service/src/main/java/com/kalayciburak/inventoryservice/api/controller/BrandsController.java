@@ -1,12 +1,11 @@
 package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.inventoryservice.model.dto.request.BrandRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.BrandResponse;
 import com.kalayciburak.inventoryservice.service.BrandService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +20,23 @@ public class BrandsController {
         return service.findById(id);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseItem<List<BrandResponse>> findAll() {
         return service.findAll();
+    }
+
+    @PostMapping
+    public ResponseItem<BrandResponse> create(@RequestBody BrandRequest request) {
+        return service.create(request);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseItem<BrandResponse> update(@PathVariable Long id, @RequestBody BrandRequest request) {
+        return service.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

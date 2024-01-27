@@ -1,4 +1,4 @@
-package com.kalayciburak.inventoryservice.model.dto.response;
+package com.kalayciburak.inventoryservice.model.dto.response.basic;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.kalayciburak.inventoryservice.util.mapper;
 
 import com.kalayciburak.commonpackage.util.mapper.BaseMapper;
 import com.kalayciburak.inventoryservice.model.dto.request.CarRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.CarResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.CarResponse;
 import com.kalayciburak.inventoryservice.model.entity.Car;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

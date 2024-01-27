@@ -17,28 +17,25 @@ public class CustomLookupRepositoryImpl implements CustomLookupRepository {
 
     @Override
     public List<Lookup> findChildrenByParentId(Long parentId) {
-        var lookupCriteria = qLookup.parent.id.eq(parentId);
         return queryFactory
                 .selectFrom(qLookup)
-                .where(lookupCriteria)
+                .where(qLookup.parent.id.eq(parentId))
                 .fetch();
     }
 
     @Override
     public List<Lookup> findChildrenByParentKey(String key) {
-        var lookupCriteria = qLookup.parent.key.eq(key);
         return queryFactory
                 .selectFrom(qLookup)
-                .where(lookupCriteria)
+                .where(qLookup.parent.key.eq(key))
                 .fetch();
     }
 
     @Override
     public List<Lookup> findChildrenByParentLabel(String label) {
-        var lookupCriteria = qLookup.parent.label.eq(label);
         return queryFactory
                 .selectFrom(qLookup)
-                .where(lookupCriteria)
+                .where(qLookup.parent.label.eq(label))
                 .fetch();
     }
 }

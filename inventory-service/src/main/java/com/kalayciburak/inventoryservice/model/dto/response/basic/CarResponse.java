@@ -1,9 +1,11 @@
-package com.kalayciburak.inventoryservice.model.dto.response;
+package com.kalayciburak.inventoryservice.model.dto.response.basic;
+
+import java.math.BigDecimal;
 
 public record CarResponse(
         Long id,
         int year,
-        double dailyPrice,
+        BigDecimal dailyPrice,
         String plate,
         String color,
         String fuel,

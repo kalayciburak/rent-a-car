@@ -2,7 +2,8 @@ package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.BrandRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.BrandResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.BrandResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.composite.BrandWithModelsResponse;
 import com.kalayciburak.inventoryservice.service.BrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,19 @@ public class BrandsController {
         return service.findById(id);
     }
 
+    @GetMapping("/id/with-models")
+    public ResponseItem<BrandWithModelsResponse> findByIdWithModels(Long id) {
+        return service.findByIdWithModels(id);
+    }
+
     @GetMapping
     public ResponseItem<List<BrandResponse>> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping("/with-models")
+    public ResponseItem<List<BrandWithModelsResponse>> findAllWithModels() {
+        return service.findAllWithModels();
     }
 
     @PostMapping

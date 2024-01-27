@@ -1,7 +1,7 @@
 package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
-import com.kalayciburak.inventoryservice.model.dto.response.LookupResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.LookupResponse;
 import com.kalayciburak.inventoryservice.service.LookupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

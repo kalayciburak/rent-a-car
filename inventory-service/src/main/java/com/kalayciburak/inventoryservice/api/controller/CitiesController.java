@@ -1,7 +1,7 @@
 package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
-import com.kalayciburak.inventoryservice.model.dto.response.CityResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.CityResponse;
 import com.kalayciburak.inventoryservice.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

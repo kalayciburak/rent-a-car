@@ -29,6 +29,6 @@ public class Lookup extends BaseEntity {
     private Lookup parent;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Lookup> children = new ArrayList<>();
 }

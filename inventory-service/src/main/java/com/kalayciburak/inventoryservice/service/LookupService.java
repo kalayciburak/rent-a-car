@@ -2,7 +2,7 @@ package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.commonpackage.util.constant.Messages;
-import com.kalayciburak.inventoryservice.model.dto.response.LookupResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.LookupResponse;
 import com.kalayciburak.inventoryservice.model.entity.Lookup;
 import com.kalayciburak.inventoryservice.repository.LookupRepository;
 import com.kalayciburak.inventoryservice.util.mapper.LookupMapper;

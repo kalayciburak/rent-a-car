@@ -2,7 +2,7 @@ package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.CarRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.CarResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.CarResponse;
 import com.kalayciburak.inventoryservice.model.entity.Car;
 import com.kalayciburak.inventoryservice.repository.CarRepository;
 import com.kalayciburak.inventoryservice.util.mapper.CarMapper;

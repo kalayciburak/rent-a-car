@@ -1,7 +1,7 @@
 package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
-import com.kalayciburak.inventoryservice.model.dto.response.CityResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.CityResponse;
 import com.kalayciburak.inventoryservice.model.entity.City;
 import com.kalayciburak.inventoryservice.repository.CityRepository;
 import com.kalayciburak.inventoryservice.util.mapper.CityMapper;

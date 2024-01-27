@@ -2,7 +2,7 @@ package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.CarRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.CarResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.CarResponse;
 import com.kalayciburak.inventoryservice.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

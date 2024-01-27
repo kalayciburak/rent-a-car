@@ -2,7 +2,8 @@ package com.kalayciburak.inventoryservice.api.controller;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.LocationRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.LocationResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.LocationResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.composite.LocationWithCarsResponse;
 import com.kalayciburak.inventoryservice.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,19 @@ public class LocationsController {
         return service.findById(id);
     }
 
+    @GetMapping("/id/with-cars")
+    public ResponseItem<LocationWithCarsResponse> findByIdWithCars(Long id) {
+        return service.findByIdWithCars(id);
+    }
+
     @GetMapping
     public ResponseItem<List<LocationResponse>> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping("/with-cars")
+    public ResponseItem<List<LocationWithCarsResponse>> findAllWithCars() {
+        return service.findAllWithCars();
     }
 
     @PostMapping

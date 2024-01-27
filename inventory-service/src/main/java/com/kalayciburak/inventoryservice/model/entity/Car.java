@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
@@ -19,7 +21,7 @@ public class Car extends BaseEntity {
     private String plate;
 
     @Column(name = "daily_price")
-    private double dailyPrice;
+    private BigDecimal dailyPrice;
 
     @ManyToOne
     @JoinColumn(name = "model_id")

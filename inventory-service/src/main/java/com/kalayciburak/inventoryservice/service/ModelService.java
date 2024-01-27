@@ -2,7 +2,8 @@ package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.ModelRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.ModelResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.ModelResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.composite.ModelWithCarsResponse;
 import com.kalayciburak.inventoryservice.model.entity.Model;
 import com.kalayciburak.inventoryservice.repository.ModelRepository;
 import com.kalayciburak.inventoryservice.service.helper.BrandHelperService;
@@ -36,10 +37,25 @@ public class ModelService {
         return createSuccessResponse(data, FOUND);
     }
 
+    public ResponseItem<ModelWithCarsResponse> findByIdWithCars(Long id) {
+        var model = findByIdOrThrow(id);
+        var data = mapper.toDtoWithCars(model);
+
+        return createSuccessResponse(data, FOUND);
+    }
+
     public ResponseItem<List<ModelResponse>> findAll() {
         var models = repository.findAll();
         if (models.isEmpty()) createNotFoundResponse(NOT_FOUND);
         var data = models.stream().map(mapper::toDto).toList();
+
+        return createSuccessResponse(data, LISTED);
+    }
+
+    public ResponseItem<List<ModelWithCarsResponse>> findAllWithCars() {
+        var models = repository.findAll();
+        if (models.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        var data = models.stream().map(mapper::toDtoWithCars).toList();
 
         return createSuccessResponse(data, LISTED);
     }

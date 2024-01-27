@@ -2,7 +2,8 @@ package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
 import com.kalayciburak.inventoryservice.model.dto.request.LocationRequest;
-import com.kalayciburak.inventoryservice.model.dto.response.LocationResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.basic.LocationResponse;
+import com.kalayciburak.inventoryservice.model.dto.response.composite.LocationWithCarsResponse;
 import com.kalayciburak.inventoryservice.model.entity.Location;
 import com.kalayciburak.inventoryservice.repository.LocationRepository;
 import com.kalayciburak.inventoryservice.service.helper.CarHelperService;
@@ -35,10 +36,25 @@ public class LocationService {
         return createSuccessResponse(data, FOUND);
     }
 
+    public ResponseItem<LocationWithCarsResponse> findByIdWithCars(Long id) {
+        var location = findByIdOrThrow(id);
+        var data = mapper.toDtoWithCars(location);
+
+        return createSuccessResponse(data, FOUND);
+    }
+
     public ResponseItem<List<LocationResponse>> findAll() {
         var locations = repository.findAll();
         if (locations.isEmpty()) createNotFoundResponse(NOT_FOUND);
         var data = locations.stream().map(mapper::toDto).toList();
+
+        return createSuccessResponse(data, FOUND);
+    }
+
+    public ResponseItem<List<LocationWithCarsResponse>> findAllWithCars() {
+        var locations = repository.findAll();
+        if (locations.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        var data = locations.stream().map(mapper::toDtoWithCars).toList();
 
         return createSuccessResponse(data, FOUND);
     }

@@ -27,6 +27,7 @@ public class Messages {
             public static final String DELETED = "Araç başarıyla silindi.";
             public static final String NOT_AVAILABLE = "Araç şu anda müsait değil.";
             public static final String NOT_AVAILABLE_TO_DELETE = "Araç silinemez, çünkü şu anda müsait değil.";
+            public static final String PLATE_EXISTS = "Araç plakası zaten mevcut.";
         }
 
         public static class Brand {
@@ -64,5 +65,12 @@ public class Messages {
             public static final String UPDATED = "Şehir başarıyla güncellendi.";
             public static final String DELETED = "Şehir başarıyla silindi.";
         }
+    }
+
+    public static class Lookup {
+        public static final String NOT_A_VALID_FUEL_TYPE = "Geçersiz yakıt türü.";
+        public static final String NOT_A_VALID_TRANSMISSION_TYPE = "Geçersiz vites türü.";
+        public static final String NOT_A_VALID_COLOR_TYPE = "Geçersiz renk türü.";
+        public static final String NOT_A_VALID_CAR_STATUS = "Geçersiz araç durumu.";
     }
 }

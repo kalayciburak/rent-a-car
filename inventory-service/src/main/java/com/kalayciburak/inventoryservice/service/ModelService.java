@@ -1,6 +1,7 @@
 package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.inventoryservice.advice.exception.ModelNotFoundException;
 import com.kalayciburak.inventoryservice.model.dto.request.ModelRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.basic.ModelResponse;
 import com.kalayciburak.inventoryservice.model.dto.response.composite.ModelWithCarsResponse;
@@ -9,7 +10,6 @@ import com.kalayciburak.inventoryservice.repository.ModelRepository;
 import com.kalayciburak.inventoryservice.service.helper.BrandHelperService;
 import com.kalayciburak.inventoryservice.service.helper.CarHelperService;
 import com.kalayciburak.inventoryservice.util.mapper.ModelMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +46,7 @@ public class ModelService {
 
     public ResponseItem<List<ModelResponse>> findAll() {
         var models = repository.findAll();
-        if (models.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (models.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = models.stream().map(mapper::toDto).toList();
 
         return createSuccessResponse(data, LISTED);
@@ -54,7 +54,7 @@ public class ModelService {
 
     public ResponseItem<List<ModelWithCarsResponse>> findAllWithCars() {
         var models = repository.findAll();
-        if (models.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (models.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = models.stream().map(mapper::toDtoWithCars).toList();
 
         return createSuccessResponse(data, LISTED);
@@ -92,10 +92,10 @@ public class ModelService {
      *
      * @param id id değeri.
      * @return Model nesnesi.
-     * @throws EntityNotFoundException Model bulunamazsa fırlatılır.
+     * @throws ModelNotFoundException Model bulunamazsa fırlatılır.
      */
     private Model findByIdOrThrow(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new ModelNotFoundException(NOT_FOUND));
     }
 
     /**

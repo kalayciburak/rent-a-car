@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: filter-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: filterdb
+      username: kalayciburak
+      password: 123456
+      auto-index-creation: true
+server:
+  servlet:
+    context-path: /api/filter-service
+
+# Graylog configuration
+graylog:
+  host: 127.0.0.1
+  port: 12201

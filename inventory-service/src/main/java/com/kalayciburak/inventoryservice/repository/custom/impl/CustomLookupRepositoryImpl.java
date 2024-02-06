@@ -12,12 +12,12 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class CustomLookupRepositoryImpl implements CustomLookupRepository {
-    private final JPAQueryFactory queryFactory;
+    private final JPAQueryFactory query;
     private final QLookup qLookup = QLookup.lookup;
 
     @Override
     public List<Lookup> findChildrenByParentId(Long parentId) {
-        return queryFactory
+        return query
                 .selectFrom(qLookup)
                 .where(qLookup.parent.id.eq(parentId))
                 .fetch();
@@ -25,7 +25,7 @@ public class CustomLookupRepositoryImpl implements CustomLookupRepository {
 
     @Override
     public List<Lookup> findChildrenByParentKey(String key) {
-        return queryFactory
+        return query
                 .selectFrom(qLookup)
                 .where(qLookup.parent.key.eq(key))
                 .fetch();
@@ -33,7 +33,7 @@ public class CustomLookupRepositoryImpl implements CustomLookupRepository {
 
     @Override
     public List<Lookup> findChildrenByParentLabel(String label) {
-        return queryFactory
+        return query
                 .selectFrom(qLookup)
                 .where(qLookup.parent.label.eq(label))
                 .fetch();

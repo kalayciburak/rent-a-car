@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/lookups")
+@RequestMapping(value = "/lookups", produces = "application/json")
 public class LookupsController {
     private final LookupService service;
 

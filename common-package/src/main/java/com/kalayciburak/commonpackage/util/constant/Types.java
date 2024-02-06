@@ -1,6 +1,8 @@
 package com.kalayciburak.commonpackage.util.constant;
 
 public class Types {
+    public static final String MAPPER_COMPONENT_MODEL = "spring";
+
     public static class Response {
         public static final String SUCCESS = "SUCCESS";
         public static final String ERROR = "ERROR";

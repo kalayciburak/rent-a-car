@@ -14,6 +14,15 @@ public class ExceptionCodes {
     public static final String NO_HANDLER_FOUND = "1900";
     public static final String FEIGN = "2000";
     public static final String CONNECTION_REFUSED = "2100";
-    public static final String PREDICATE_BUILD = "2200";
-    public static final String CAR_NOT_AVAILABLE = "2300";
+
+    public static class Inventory {
+        public static final String CAR_NOT_AVAILABLE = "9000";
+        public static final String CAR_NOT_FOUND = "9100";
+        public static final String BRAND_NOT_FOUND = "9200";
+        public static final String MODEL_NOT_FOUND = "9300";
+        public static final String CITY_NOT_FOUND = "9400";
+        public static final String LOCATION_NOT_FOUND = "9500";
+        public static final String LOOKUP_NOT_FOUND = "9600";
+        public static final String PLATE_EXISTS = "9700";
+    }
 }

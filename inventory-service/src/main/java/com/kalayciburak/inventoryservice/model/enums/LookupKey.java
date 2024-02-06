@@ -3,6 +3,13 @@ package com.kalayciburak.inventoryservice.model.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * <b>Veritanında tutulan lookup tablosunun key değerlerini tutan enum.</b>
+ * <p>
+ * Lookup tablosunda değişmeyecek olan tek veri <b>key</b> değerleri olduğu için enum olarak tutuldu.
+ *
+ * @see com.kalayciburak.inventoryservice.model.entity.Lookup
+ */
 @Getter
 @AllArgsConstructor
 public enum LookupKey {

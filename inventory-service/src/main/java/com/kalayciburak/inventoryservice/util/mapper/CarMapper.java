@@ -30,7 +30,17 @@ public interface CarMapper extends BaseMapper<CarResponse, Car> {
     @Mapping(target = "transmission", source = "transmissionType.label")
     CarResponse toDto(Car car);
 
+    @Mapping(target = "fuelType.id", source = "fuelTypeId")
+    @Mapping(target = "model.id", source = "modelId")
+    @Mapping(target = "colorType.id", source = "colorTypeId")
+    @Mapping(target = "location.id", source = "locationId")
+    @Mapping(target = "transmissionType.id", source = "transmissionTypeId")
     Car toEntity(CarRequest request);
 
+    @Mapping(target = "fuelType.id", source = "fuelTypeId")
+    @Mapping(target = "model.id", source = "modelId")
+    @Mapping(target = "colorType.id", source = "colorTypeId")
+    @Mapping(target = "location.id", source = "locationId")
+    @Mapping(target = "transmissionType.id", source = "transmissionTypeId")
     void updateEntity(CarRequest request, @MappingTarget Car entity);
 }

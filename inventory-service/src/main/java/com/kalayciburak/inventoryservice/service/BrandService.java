@@ -1,6 +1,7 @@
 package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.inventoryservice.advice.exception.BrandNotFoundException;
 import com.kalayciburak.inventoryservice.model.dto.request.BrandRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.basic.BrandResponse;
 import com.kalayciburak.inventoryservice.model.dto.response.composite.BrandWithModelsResponse;
@@ -8,7 +9,6 @@ import com.kalayciburak.inventoryservice.model.entity.Brand;
 import com.kalayciburak.inventoryservice.model.entity.Model;
 import com.kalayciburak.inventoryservice.repository.BrandRepository;
 import com.kalayciburak.inventoryservice.util.mapper.BrandMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class BrandService {
 
     public ResponseItem<List<BrandResponse>> findAll() {
         var brands = repository.findAll();
-        if (brands.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (brands.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = brands.stream().map(mapper::toDto).toList();
 
         return createSuccessResponse(data, LISTED);
@@ -51,7 +51,7 @@ public class BrandService {
 
     public ResponseItem<List<BrandWithModelsResponse>> findAllWithModels() {
         var brands = repository.findAll();
-        if (brands.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (brands.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = brands.stream().map(mapper::toDtoWithModels).toList();
 
         return createSuccessResponse(data, LISTED);
@@ -87,10 +87,10 @@ public class BrandService {
      *
      * @param id id değeri.
      * @return Marka nesnesi.
-     * @throws EntityNotFoundException Marka bulunamazsa fırlatılır.
+     * @throws BrandNotFoundException Marka bulunamazsa fırlatılır.
      */
     private Brand findByIdOrThrow(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new BrandNotFoundException(NOT_FOUND));
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.kalayciburak.inventoryservice.service;
 
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.inventoryservice.advice.exception.LocationNotFoundException;
 import com.kalayciburak.inventoryservice.model.dto.request.LocationRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.basic.LocationResponse;
 import com.kalayciburak.inventoryservice.model.dto.response.composite.LocationWithCarsResponse;
@@ -8,7 +9,6 @@ import com.kalayciburak.inventoryservice.model.entity.Location;
 import com.kalayciburak.inventoryservice.repository.LocationRepository;
 import com.kalayciburak.inventoryservice.service.helper.CarHelperService;
 import com.kalayciburak.inventoryservice.util.mapper.LocationMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,7 @@ public class LocationService {
 
     public ResponseItem<List<LocationResponse>> findAll() {
         var locations = repository.findAll();
-        if (locations.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (locations.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = locations.stream().map(mapper::toDto).toList();
 
         return createSuccessResponse(data, FOUND);
@@ -53,10 +53,14 @@ public class LocationService {
 
     public ResponseItem<List<LocationWithCarsResponse>> findAllWithCars() {
         var locations = repository.findAll();
-        if (locations.isEmpty()) createNotFoundResponse(NOT_FOUND);
+        if (locations.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = locations.stream().map(mapper::toDtoWithCars).toList();
 
         return createSuccessResponse(data, FOUND);
+    }
+
+    public Location findEntityById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new LocationNotFoundException(NOT_FOUND));
     }
 
     public ResponseItem<LocationResponse> create(LocationRequest request) {
@@ -90,10 +94,10 @@ public class LocationService {
      *
      * @param id id değeri.
      * @return Lokasyon nesnesi.
-     * @throws EntityNotFoundException Lokasyon bulunamazsa fırlatılır.
+     * @throws LocationNotFoundException Lokasyon bulunamazsa fırlatılır.
      */
     private Location findByIdOrThrow(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new LocationNotFoundException(NOT_FOUND));
     }
 
     /**

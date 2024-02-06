@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+import java.math.BigDecimal;
+
 public record CarRequest(
         @NotNull(message = "Bu alan boş bırakılamaz.")
         @Min(value = 1, message = "Model seçimi yapınız.")
@@ -27,10 +29,6 @@ public record CarRequest(
         Long colorTypeId,
 
         @NotNull(message = "Bu alan boş bırakılamaz.")
-        @Min(value = 1, message = "Araç durumu seçimi yapınız.")
-        Long carStatusId,
-
-        @NotNull(message = "Bu alan boş bırakılamaz.")
         int year,
 
         @Pattern(regexp = Regex.Plate)
@@ -39,5 +37,5 @@ public record CarRequest(
 
         @NotNull(message = "Bu alan boş bırakılamaz.")
         @Min(value = 100, message = "Günlük fiyat 100 TL'den az olamaz.")
-        double dailyPrice
+        BigDecimal dailyPrice
 ) {}

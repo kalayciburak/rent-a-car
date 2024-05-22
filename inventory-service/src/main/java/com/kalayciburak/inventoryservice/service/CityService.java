@@ -13,8 +13,7 @@ import java.util.List;
 
 import static com.kalayciburak.commonpackage.model.response.GenericResponse.createNotFoundResponse;
 import static com.kalayciburak.commonpackage.model.response.GenericResponse.createSuccessResponse;
-import static com.kalayciburak.commonpackage.util.constant.Messages.Inventory.City.FOUND;
-import static com.kalayciburak.commonpackage.util.constant.Messages.Inventory.City.NOT_FOUND;
+import static com.kalayciburak.commonpackage.util.constant.Messages.Inventory.City.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,7 @@ public class CityService {
         if (cities.isEmpty()) return createNotFoundResponse(NOT_FOUND);
         var data = cities.stream().map(mapper::toDto).toList();
 
-        return createSuccessResponse(data, FOUND);
+        return createSuccessResponse(data, LISTED);
     }
 
     /**

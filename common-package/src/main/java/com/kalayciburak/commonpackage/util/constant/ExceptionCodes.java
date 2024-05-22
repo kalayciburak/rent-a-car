@@ -14,6 +14,13 @@ public class ExceptionCodes {
     public static final String NO_HANDLER_FOUND = "1900";
     public static final String FEIGN = "2000";
     public static final String CONNECTION_REFUSED = "2100";
+    public static final String PREDICATE_BUILD = "2200";
+    public static final String JSON_PROCESSING_EXCEPTION = "2300";
+    public static final String KEYCLOAK_EXCEPTION = "2400";
+    public static final String UNAUTHORIZED = "2500";
+    public static final String USER_NOT_ACTIVE = "2600";
+    public static final String USER_NOT_FOUND = "2700";
+    public static final String ILLEGAL_ARGUMENT = "2800";
 
     public static class Inventory {
         public static final String CAR_NOT_AVAILABLE = "9000";

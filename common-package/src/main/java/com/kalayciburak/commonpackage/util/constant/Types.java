@@ -24,5 +24,8 @@ public class Types {
         public static final String FEIGN = "ERROR: FEIGN_EXCEPTION";
         public static final String UNAUTHORIZED = "ERROR: UNAUTHORIZED_EXCEPTION";
         public static final String CONNECTION = "ERROR: CONNECTION_EXCEPTION";
+        public static final String JSON_PROCESSING = "ERROR: JSON_PROCESSING_EXCEPTION";
+        public static final String KEYCLOAK = "ERROR: KEYCLOAK_EXCEPTION";
+        public static final String ILLEGAL_ARGUMENT = "ERROR: ILLEGAL_ARGUMENT_EXCEPTION";
     }
 }

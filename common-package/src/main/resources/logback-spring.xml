@@ -43,6 +43,10 @@
         <appender-ref ref="GELF"/>
     </logger>
 
+    <logger name="com.kalayciburak.commonpackage.aspect.performance.SlowQueryAspect" level="WARN">
+        <appender-ref ref="GELF"/>
+    </logger>
+
     <logger name="com.kalayciburak.commonpackage.filter.LoggingFilter" level="DEBUG">
         <appender-ref ref="GELF"/>
     </logger>

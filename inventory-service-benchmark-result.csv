@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
+"com.kalayciburak.inventoryservice.benchmark.ServiceBenchmark.testBrandFindAll","avgt",4,25,"0,001950","0,000130","s/op"
+"com.kalayciburak.inventoryservice.benchmark.ServiceBenchmark.testCarFindAll","avgt",2,25,"0,007970","0,000557","s/op"
+"com.kalayciburak.inventoryservice.benchmark.ServiceBenchmark.testModelFindAll","avgt",6,25,"0,002727","0,000188","s/op"

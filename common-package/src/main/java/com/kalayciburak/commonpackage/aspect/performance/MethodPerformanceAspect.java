@@ -13,6 +13,7 @@ import static java.lang.System.currentTimeMillis;
 @Aspect
 @Component
 public class MethodPerformanceAspect {
+    private static final long SLOW_QUERY_THRESHOLD = 200;
     private static final Logger log = LoggerFactory.getLogger(MethodPerformanceAspect.class);
 
     @Around("@annotation(LogExecutionTime)")
@@ -21,7 +22,9 @@ public class MethodPerformanceAspect {
         var result = joinPoint.proceed();
         var duration = currentTimeMillis() - startTime;
         var message = format("Method %s took %dms", joinPoint.getSignature().getName(), duration);
-        log.warn(message);
+        var isQuerySlow = duration > SLOW_QUERY_THRESHOLD;
+        if (isQuerySlow) log.warn(message);
+        else log.info(message);
 
         return result;
     }

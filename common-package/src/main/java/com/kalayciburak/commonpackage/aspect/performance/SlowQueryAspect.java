@@ -12,7 +12,7 @@ import static java.lang.String.format;
 @Aspect
 @Component
 public class SlowQueryAspect {
-    private static final long SLOW_QUERY_THRESHOLD = 50; // milliseconds
+    private static final long SLOW_QUERY_THRESHOLD = 200;
     private static final Logger log = LoggerFactory.getLogger(SlowQueryAspect.class);
 
     @Around("execution(* com.kalayciburak..repository..*(..))")

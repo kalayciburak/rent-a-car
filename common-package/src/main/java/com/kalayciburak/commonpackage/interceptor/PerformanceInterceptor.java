@@ -12,7 +12,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Component
 public class PerformanceInterceptor implements HandlerInterceptor {
-    private static final long SLOW_REQUEST_THRESHOLD = 50; // milliseconds
+    private static final long SLOW_REQUEST_THRESHOLD = 200;
     private static final Logger log = getLogger(PerformanceInterceptor.class);
 
     @Override

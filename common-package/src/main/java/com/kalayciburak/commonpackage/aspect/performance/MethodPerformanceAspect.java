@@ -21,7 +21,8 @@ public class MethodPerformanceAspect {
         var startTime = currentTimeMillis();
         var result = joinPoint.proceed();
         var duration = currentTimeMillis() - startTime;
-        var message = format("Method %s took %dms", joinPoint.getSignature().getName(), duration);
+        var name = joinPoint.getSignature().getName();
+        var message = format("Method %s took %dms", name, duration);
         var isQuerySlow = duration > SLOW_QUERY_THRESHOLD;
         if (isQuerySlow) log.warn(message);
         else log.info(message);

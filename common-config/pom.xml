@@ -15,6 +15,7 @@
     <description>Tüm mikro servisler için ortak (common/parent pom.xml) yapılandırma.</description>
     <properties>
         <java.version>21</java.version>
+        <jmh.version>1.37</jmh.version>
         <lombok.version>1.18.30</lombok.version>
         <logback-gelf.version>5.0.1</logback-gelf.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -99,12 +100,12 @@
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
-            <version>1.37</version>
+            <version>${jmh.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.37</version>
+            <version>${jmh.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -148,7 +149,7 @@
                         <path>
                             <groupId>org.openjdk.jmh</groupId>
                             <artifactId>jmh-generator-annprocess</artifactId>
-                            <version>1.37</version>
+                            <version>${jmh.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

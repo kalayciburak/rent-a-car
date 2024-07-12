@@ -14,12 +14,13 @@
     <description>inventory-service</description>
     <properties>
         <mysql.version>8.3.0</mysql.version>
+        <common-package.version>0.0.1-SNAPSHOT</common-package.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.kalayciburak</groupId>
             <artifactId>common-package</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${common-package.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

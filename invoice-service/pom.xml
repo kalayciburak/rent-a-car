@@ -14,12 +14,13 @@
     <description>invoice-service</description>
     <properties>
         <java.version>21</java.version>
+        <common-package.version>0.0.1-SNAPSHOT</common-package.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.kalayciburak</groupId>
             <artifactId>common-package</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${common-package.version}</version>
         </dependency>
     </dependencies>
     <build>

@@ -38,7 +38,7 @@ services:
 
   # Graylog: Merkezi log yönetimi sistemi
   graylog:
-    image: graylog/graylog:5.0
+    image: graylog/graylog:6.0.4
     environment:
       - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
       - GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET}
@@ -51,7 +51,6 @@ services:
     ports:
       - "9000:9000"
       - "12201:12201/udp"
-
 
 # ? Volumes
 volumes:

@@ -14,6 +14,18 @@ services:
     volumes:
       - inventorydb:/data/db
 
+  filterdb:
+    container_name: filterdb
+    image: mongo:5.0.13
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=kalayciburak
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+      - MONGO_INITDB_DATABASE=filterdb
+    volumes:
+      - filterdb:/data/db
+
   # ? Graylog Configuration
   # MongoDB: Graylog'un metadata ve konfigürasyon bilgisi için kullandığı veritabanı
   mongo:
@@ -52,9 +64,31 @@ services:
       - "9000:9000"
       - "12201:12201/udp"
 
+  kafka:
+    container_name: kafka
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - ALLOW_PLAINTEXT_LISTENER=yes
+
 # ? Volumes
 volumes:
   inventorydb:
+    driver: local
+  filterdb:
+    driver: local
+  kafka_data:
     driver: local
 
 # ? Networks

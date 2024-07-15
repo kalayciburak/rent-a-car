@@ -3,15 +3,22 @@ spring:
     name: filter-service
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: filterdb
-      username: kalayciburak
-      password: 123456
-      auto-index-creation: true
+      uri: mongodb://kalayciburak:123456@127.0.0.1:27017/filterdb?authSource=admin
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: http://127.0.0.1:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.kalayciburak.*"
 server:
   servlet:
     context-path: /api/filter-service
+  port: 8081
 
 # Graylog configuration
 graylog:

@@ -1,4 +1,4 @@
-package com.kalayciburak.commonpackage.filter;
+package com.kalayciburak.filterservice.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kalayciburak.commonpackage.advice.exception.CustomRuntimeException;

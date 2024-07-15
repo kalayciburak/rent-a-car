@@ -20,7 +20,7 @@ values (1, '2024-01-23 20:29:49.000000', null, true, null, 'Yakıt Türü', null
        (19, '2024-01-23 20:29:49.000000', null, true, null, 'Turuncu', 11, 'orange'),
        (20, '2024-01-23 20:29:49.000000', null, true, null, 'Mor', 11, 'purple'),
        (21, '2024-01-23 20:29:49.000000', null, true, null, 'Gri', 11, 'gray'),
-       (22, '2024-01-25 15:11:46.000000', null, true, null, 'Araç Durumu', null, 'car-status'),
+       (22, '2024-01-25 15:11:46.000000', null, true, null, 'Araç Durumu', null, 'filter-status'),
        (23, '2024-01-25 15:11:46.000000', null, true, null, 'Müsait', 22, 'available'),
        (24, '2024-01-25 15:11:46.000000', null, true, null, 'Kiralandı', 22, 'rented'),
        (25, '2024-01-25 15:11:46.000000', null, true, null, 'Bakımda', 22, 'under-maintenance'),

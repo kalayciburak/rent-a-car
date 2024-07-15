@@ -8,6 +8,7 @@ import com.kalayciburak.commonpackage.util.constant.Profiles;
 import com.kalayciburak.commonpackage.util.constant.Types;
 import feign.FeignException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -140,7 +141,7 @@ public class BaseRestExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         var message = "Veri bütünlüğü hatası. Lütfen daha sonra tekrar deneyiniz.";
-        if (ex.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
+        if (ex.getCause() instanceof ConstraintViolationException) {
             return buildResponseEntity(new BaseError(CONFLICT, Types.Exception.DATA_INTEGRITY, ExceptionCodes.DATA_INTEGRITY_VIOLATION, message, ex.getCause()));
         }
 

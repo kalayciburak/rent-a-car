@@ -1,4 +1,4 @@
-package com.kalayciburak.commonpackage.aspect;
+package com.kalayciburak.filterservice.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

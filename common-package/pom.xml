@@ -12,6 +12,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>common-package</name>
     <description>common-package</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

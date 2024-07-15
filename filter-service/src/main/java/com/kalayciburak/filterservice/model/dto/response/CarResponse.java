@@ -1,9 +1,10 @@
-package com.kalayciburak.inventoryservice.model.dto.response.basic;
+package com.kalayciburak.filterservice.model.dto.response;
 
 import java.math.BigDecimal;
 
 public record CarResponse(
-        Long id,
+        String id,
+        Long carId,
         Long modelId,
         Long brandId,
         Long cityId,

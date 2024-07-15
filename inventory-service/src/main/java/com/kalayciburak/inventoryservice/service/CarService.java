@@ -1,6 +1,8 @@
 package com.kalayciburak.inventoryservice.service;
 
+import com.kalayciburak.commonpackage.broker.kafka.producer.BaseProducer;
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.commonpackage.util.event.inventory.CarDeletedEvent;
 import com.kalayciburak.inventoryservice.advice.exception.car.CarNotFoundException;
 import com.kalayciburak.inventoryservice.advice.exception.car.PlateExistsException;
 import com.kalayciburak.inventoryservice.model.dto.request.CarRequest;
@@ -22,6 +24,7 @@ import static com.kalayciburak.commonpackage.util.constant.Messages.Inventory.Ca
 @RequiredArgsConstructor
 public class CarService {
     private final CarMapper mapper;
+    private final BaseProducer producer;
     private final CarRepository repository;
     private final LookupService lookupService;
     private final LocationService locationService;
@@ -58,6 +61,7 @@ public class CarService {
         setCarStatusToAvailable(car);
         var savedCar = repository.save(car);
         var data = mapper.toDto(savedCar);
+        produceCarCreatedEvent(data);
 
         return createSuccessResponse(data, SAVED);
     }
@@ -70,6 +74,7 @@ public class CarService {
         updateCarDetails(car);
         var savedCar = repository.save(car);
         var data = mapper.toDto(savedCar);
+        produceCarUpdatedEvent(data);
 
         return createSuccessResponse(data, UPDATED);
     }
@@ -77,10 +82,7 @@ public class CarService {
     public void delete(Long id) {
         findByIdOrThrow(id);
         repository.softDeleteById(id);
-    }
-
-    public Car findEntityById(Long id) {
-        return findByIdOrThrow(id);
+        produceCarDeletedEvent(id);
     }
 
     /**
@@ -144,5 +146,20 @@ public class CarService {
      */
     private Car findByIdOrThrow(Long id) {
         return repository.findById(id).orElseThrow(() -> new CarNotFoundException(NOT_FOUND));
+    }
+
+    private void produceCarCreatedEvent(CarResponse response) {
+        var event = mapper.toCreatedEvent(response);
+        producer.sendMessage(event, "car.created");
+    }
+
+    private void produceCarUpdatedEvent(CarResponse response) {
+        var event = mapper.toUpdatedEvent(response);
+        producer.sendMessage(event, "car.updated");
+    }
+
+    private void produceCarDeletedEvent(Long carId) {
+        var event = new CarDeletedEvent(carId);
+        producer.sendMessage(event, "car.deleted");
     }
 }

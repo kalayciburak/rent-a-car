@@ -1,6 +1,9 @@
 package com.kalayciburak.inventoryservice.service;
 
+import com.kalayciburak.commonpackage.broker.kafka.producer.BaseProducer;
 import com.kalayciburak.commonpackage.model.response.ResponseItem;
+import com.kalayciburak.commonpackage.util.event.inventory.BrandDeletedEvent;
+import com.kalayciburak.commonpackage.util.event.inventory.BrandUpdatedEvent;
 import com.kalayciburak.inventoryservice.advice.exception.BrandNotFoundException;
 import com.kalayciburak.inventoryservice.model.dto.request.BrandRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.basic.BrandResponse;
@@ -24,6 +27,7 @@ import static com.kalayciburak.commonpackage.util.constant.Messages.Inventory.Br
 @RequiredArgsConstructor
 public class BrandService {
     private final BrandMapper mapper;
+    private final BaseProducer producer;
     private final ModelService modelService;
     private final BrandRepository repository;
 
@@ -70,6 +74,7 @@ public class BrandService {
         mapper.updateEntity(request, brand);
         var savedBrand = repository.save(brand);
         var data = mapper.toDto(savedBrand);
+        produceBrandUpdatedEvent(data);
 
         return createSuccessResponse(data, UPDATED);
     }
@@ -78,6 +83,7 @@ public class BrandService {
         var brand = findByIdOrThrow(id);
         deleteModelsAndAssociatedCars(brand.getModels());
         repository.softDeleteById(id);
+        produceBrandDeletedEvent(id);
     }
 
     /**
@@ -102,5 +108,15 @@ public class BrandService {
      */
     private void deleteModelsAndAssociatedCars(List<Model> models) {
         if (models != null) models.forEach(model -> modelService.delete(model.getId()));
+    }
+
+    private void produceBrandUpdatedEvent(BrandResponse response) {
+        var event = new BrandUpdatedEvent(response.id(), response.name());
+        producer.sendMessage(event, "brand.updated");
+    }
+
+    private void produceBrandDeletedEvent(Long brandId) {
+        var event = new BrandDeletedEvent(brandId);
+        producer.sendMessage(event, "brand.deleted");
     }
 }

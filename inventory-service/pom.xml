@@ -18,15 +18,15 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.kalayciburak</groupId>
-            <artifactId>common-package</artifactId>
-            <version>${common-package.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>${mysql.version}</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.kalayciburak</groupId>
+            <artifactId>common-package</artifactId>
+            <version>${common-package.version}</version>
         </dependency>
     </dependencies>
     <build>

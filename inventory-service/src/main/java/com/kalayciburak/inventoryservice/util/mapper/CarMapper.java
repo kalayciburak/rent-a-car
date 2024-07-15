@@ -1,5 +1,7 @@
 package com.kalayciburak.inventoryservice.util.mapper;
 
+import com.kalayciburak.commonpackage.util.event.inventory.CarCreatedEvent;
+import com.kalayciburak.commonpackage.util.event.inventory.CarUpdatedEvent;
 import com.kalayciburak.commonpackage.util.mapper.BaseMapper;
 import com.kalayciburak.inventoryservice.model.dto.request.CarRequest;
 import com.kalayciburak.inventoryservice.model.dto.response.basic.CarResponse;
@@ -10,6 +12,12 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = {LocationMapper.class})
 public interface CarMapper extends BaseMapper<CarResponse, Car> {
+    @Mapping(target = "fuelType.id", source = "fuelId")
+    @Mapping(target = "model.id", source = "modelId")
+    @Mapping(target = "model.brand.id", source = "brandId")
+    @Mapping(target = "colorType.id", source = "colorId")
+    @Mapping(target = "location.id", source = "locationId")
+    @Mapping(target = "transmissionType.id", source = "transmissionId")
     @Mapping(target = "fuelType.label", source = "fuel")
     @Mapping(target = "model.name", source = "modelName")
     @Mapping(target = "colorType.label", source = "color")
@@ -20,6 +28,14 @@ public interface CarMapper extends BaseMapper<CarResponse, Car> {
     @Mapping(target = "transmissionType.label", source = "transmission")
     Car toEntity(CarResponse carResponse);
 
+    @Mapping(target = "brandId", source = "model.brand.id")
+    @Mapping(target = "modelId", source = "model.id")
+    @Mapping(target = "cityId", source = "location.city.id")
+    @Mapping(target = "locationId", source = "location.id")
+    @Mapping(target = "carStatusId", source = "carStatus.id")
+    @Mapping(target = "fuelId", source = "fuelType.id")
+    @Mapping(target = "transmissionId", source = "transmissionType.id")
+    @Mapping(target = "colorId", source = "colorType.id")
     @Mapping(target = "fuel", source = "fuelType.label")
     @Mapping(target = "modelName", source = "model.name")
     @Mapping(target = "color", source = "colorType.label")
@@ -43,4 +59,10 @@ public interface CarMapper extends BaseMapper<CarResponse, Car> {
     @Mapping(target = "location.id", source = "locationId")
     @Mapping(target = "transmissionType.id", source = "transmissionTypeId")
     void updateEntity(CarRequest request, @MappingTarget Car entity);
+
+    @Mapping(target = "carId", source = "id")
+    CarCreatedEvent toCreatedEvent(CarResponse response);
+
+    @Mapping(target = "carId", source = "id")
+    CarUpdatedEvent toUpdatedEvent(CarResponse response);
 }

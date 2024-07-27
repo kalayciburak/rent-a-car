@@ -18,7 +18,6 @@ public class PerformanceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         request.setAttribute("startTime", currentTimeMillis());
-        log.info("Request URL: {}", request.getRequestURL());
 
         return true;
     }

@@ -29,9 +29,7 @@ public class CarsController {
     @GetMapping
     @Operation(summary = "Tüm aktif araçları getirir",
             description = "Sistemdeki tüm aktif araçların bir listesini getirir.")
-    public ResponseItem<List<CarResponse>> findAll(@RequestParam boolean isSlow) throws InterruptedException {
-        if (isSlow) Thread.sleep(10000); // 10 saniye
-
+    public ResponseItem<List<CarResponse>> findAll() {
         return service.findAll();
     }
 

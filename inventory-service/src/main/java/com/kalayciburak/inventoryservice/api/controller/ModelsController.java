@@ -18,19 +18,19 @@ import java.util.List;
 public class ModelsController {
     private final ModelService service;
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     @Operation(summary = "Belirli bir ID'ye göre model getirir",
             description = "Verilen ID'ye sahip spesifik bir modeli getirir.")
     public ResponseItem<ModelResponse> findById(
-            @RequestParam @Parameter(description = "Model ID") Long id) {
+            @PathVariable @Parameter(description = "Model ID") Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/id/with-cars")
+    @GetMapping("/{id}/with-cars")
     @Operation(summary = "ID'ye göre model ve araçlarını getirir",
             description = "Verilen ID'ye sahip modelin kendisi ile birlikte ilgili tüm araçlarını getirir.")
     public ResponseItem<ModelWithCarsResponse> findByIdWithCars(
-            @RequestParam @Parameter(description = "Model ID") Long id) {
+            @PathVariable @Parameter(description = "Model ID") Long id) {
         return service.findByIdWithCars(id);
     }
 

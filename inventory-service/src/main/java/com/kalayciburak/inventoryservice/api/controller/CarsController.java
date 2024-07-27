@@ -18,18 +18,20 @@ import java.util.List;
 public class CarsController {
     private final CarService service;
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     @Operation(summary = "Belirli bir ID'ye göre araç getirir",
             description = "Verilen ID'ye sahip spesifik bir aracı getirir.")
     public ResponseItem<CarResponse> findById(
-            @RequestParam @Parameter(description = "Araç ID") Long id) {
+            @PathVariable @Parameter(description = "Araç ID") Long id) {
         return service.findById(id);
     }
 
     @GetMapping
     @Operation(summary = "Tüm aktif araçları getirir",
             description = "Sistemdeki tüm aktif araçların bir listesini getirir.")
-    public ResponseItem<List<CarResponse>> findAll() {
+    public ResponseItem<List<CarResponse>> findAll(@RequestParam boolean isSlow) throws InterruptedException {
+        if (isSlow) Thread.sleep(10000); // 10 saniye
+
         return service.findAll();
     }
 

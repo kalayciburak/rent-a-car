@@ -18,19 +18,19 @@ import java.util.List;
 public class BrandsController {
     private final BrandService service;
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     @Operation(summary = "Belirli bir ID'ye göre marka getirir",
             description = "Verilen ID'ye sahip spesifik bir markayı getirir.")
     public ResponseItem<BrandResponse> findById(
-            @RequestParam @Parameter(description = "Marka ID") Long id) {
+            @PathVariable @Parameter(description = "Marka ID") Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/id/with-models")
+    @GetMapping("/{id}/with-models")
     @Operation(summary = "ID'ye göre marka ve modellerini getirir",
             description = "Verilen ID'ye sahip markanın kendisi ile birlikte ilgili tüm modellerini getirir.")
     public ResponseItem<BrandWithModelsResponse> findByIdWithModels(
-            @RequestParam @Parameter(description = "Marka ID") Long id) {
+            @PathVariable @Parameter(description = "Marka ID") Long id) {
         return service.findByIdWithModels(id);
     }
 

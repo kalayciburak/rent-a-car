@@ -18,19 +18,19 @@ import java.util.List;
 public class LocationsController {
     private final LocationService service;
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     @Operation(summary = "Belirli bir ID'ye göre konum getirir",
             description = "Verilen ID'ye sahip spesifik bir konumu getirir.")
     public ResponseItem<LocationResponse> findById(
-            @RequestParam @Parameter(description = "Konum ID") Long id) {
+            @PathVariable @Parameter(description = "Konum ID") Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/id/with-cars")
+    @GetMapping("/{id}/with-cars")
     @Operation(summary = "ID'ye göre konum ve araçlarını getirir",
             description = "Verilen ID'ye sahip konumun kendisi ile birlikte ilgili tüm araçlarını getirir.")
     public ResponseItem<LocationWithCarsResponse> findByIdWithCars(
-            @RequestParam @Parameter(description = "Konum ID") Long id) {
+            @PathVariable @Parameter(description = "Konum ID") Long id) {
         return service.findByIdWithCars(id);
     }
 

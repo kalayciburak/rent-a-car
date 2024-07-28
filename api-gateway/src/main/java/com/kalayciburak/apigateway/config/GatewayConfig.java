@@ -8,6 +8,23 @@ import org.springframework.http.HttpStatus;
 
 @Configuration
 public class GatewayConfig {
+    /**
+     * Bu metot, custom route tanımları oluşturur ve Spring Cloud Gateway'e yükler.
+     *
+     * <p>Bu örnekte, "/inventory-service/api/**" pattern'ine uyan istekler,
+     * "inventory-service" servisine yönlendirilir. Yönlendirme sırasında çeşitli
+     * filtreler uygulanır ve circuit breaker ile hata durumlarında fallback işlemi yapılır.
+     *
+     * <ul>
+     * <li><b>RemoveRequestHeader</b>: "Cookie" başlığını kaldırır.</li>
+     * <li><b>StripPrefix</b>: URL'nin ilk kısmını kaldırır.</li>
+     * <li><b>Retry</b>: 1 kere yeniden deneme yapar ve 503 (Service Unavailable) durum kodunda geçerlidir.</li>
+     * <li><b>CircuitBreaker</b>: "inventoryService" isimli circuit breaker ile fallback URI'sine yönlendirir.</li>
+     * </ul>
+     *
+     * @param builder RouteLocatorBuilder, route tanımlarını inşa etmek için kullanılır.
+     * @return Oluşturulan RouteLocator nesnesi.
+     */
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -16,10 +33,9 @@ public class GatewayConfig {
                         .filters(f -> f.removeRequestHeader("Cookie")
                                 .stripPrefix(1)
                                 .retry(config -> config.setRetries(1).setStatuses(HttpStatus.SERVICE_UNAVAILABLE))
-                                .circuitBreaker(config -> config.setName("inventoryService")
+                                .circuitBreaker(config -> config.setName("inventoryService") // ? yml'de belirtilen circuit breaker ismi
                                         .setFallbackUri("forward:/fallback")
-                                        .setRouteId("inventory-service"))
-                        )
+                                        .setRouteId("inventory-service")))
                         .uri("lb://inventory-service"))
                 .build();
     }

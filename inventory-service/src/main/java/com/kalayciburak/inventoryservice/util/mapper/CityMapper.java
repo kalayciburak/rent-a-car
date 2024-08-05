@@ -5,6 +5,6 @@ import com.kalayciburak.inventoryservice.model.dto.response.basic.CityResponse;
 import com.kalayciburak.inventoryservice.model.entity.City;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CityMapper.class})
 public interface CityMapper extends BaseMapper<CityResponse, City> {
 }

@@ -1,21 +1,25 @@
 package com.kalayciburak.commonpackage.model.response;
 
-import com.kalayciburak.commonpackage.util.constant.Messages;
 import com.kalayciburak.commonpackage.util.constant.StatusCodes;
 import com.kalayciburak.commonpackage.util.constant.Types;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import java.util.Set;
+
+import static com.kalayciburak.commonpackage.util.constant.Keywords.creationKeywords;
 
 public class GenericResponse {
     public static <T> ResponseItem<T> createSuccessResponse(T data, String message) {
         var code = determineSuccessStatusCode(message);
-        int size = data instanceof List<?> ? ((List<?>) data).size() : 1;
+        int size = getSize(data);
 
         return new ResponseItem<>(Types.Response.SUCCESS, code, data, message, true, size);
     }
 
-    public static <T> ResponseItem<T> createSuccessResponse(T data, int size, String message) {
-        var code = determineSuccessStatusCode(message);
+    public static <T> ResponseItem<T> createSuccessResponse(String code, T data, String message) {
+        int size = getSize(data);
 
         return new ResponseItem<>(Types.Response.SUCCESS, code, data, message, true, size);
     }
@@ -25,8 +29,19 @@ public class GenericResponse {
     }
 
     private static String determineSuccessStatusCode(String message) {
-        return (message.equals(Messages.Entity.SAVED) || message.equals(Messages.Entities.SAVED))
-                ? StatusCodes.STATUS_CREATED
-                : StatusCodes.STATUS_OK;
+        return creationKeywords.stream()
+                               .map(String::toLowerCase)
+                               .anyMatch(message.toLowerCase()::contains)
+                ? HttpStatus.CREATED.toString()
+                : HttpStatus.OK.toString();
+    }
+
+    private static int getSize(Object data) {
+        return switch (data) {
+            case List<?> objects -> objects.size();
+            case Page<?> objects -> objects.getSize();
+            case Set<?> objects -> objects.size();
+            case null, default -> 1;
+        };
     }
 }

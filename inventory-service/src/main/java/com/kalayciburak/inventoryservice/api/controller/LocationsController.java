@@ -8,6 +8,7 @@ import com.kalayciburak.inventoryservice.service.LocationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class LocationsController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Yeni bir konum oluşturur",
             description = "Verilen konum bilgilerine göre yeni bir konum kaydı oluşturur.")
     public ResponseItem<LocationResponse> create(
@@ -66,6 +68,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Belirli bir ID'ye sahip konumu siler",
             description = "Verilen ID'ye sahip konumu sistemden siler.")
     public void delete(

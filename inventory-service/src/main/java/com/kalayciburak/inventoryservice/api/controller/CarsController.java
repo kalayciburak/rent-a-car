@@ -8,6 +8,7 @@ import com.kalayciburak.inventoryservice.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class CarsController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Yeni bir araç oluşturur",
             description = "Verilen araç bilgilerine göre yeni bir araç kaydı oluşturur.")
     public ResponseItem<CarResponse> create(
@@ -59,6 +61,7 @@ public class CarsController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Belirli bir ID'ye sahip aracı siler",
             description = "Verilen ID'ye sahip aracı sistemden siler.")
     public void delete(

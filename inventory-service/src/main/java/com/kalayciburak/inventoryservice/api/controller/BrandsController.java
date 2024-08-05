@@ -8,6 +8,7 @@ import com.kalayciburak.inventoryservice.service.BrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class BrandsController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Yeni bir marka oluşturur",
             description = "Verilen marka bilgilerine göre yeni bir marka kaydı oluşturur.")
     public ResponseItem<BrandResponse> create(
@@ -66,6 +68,7 @@ public class BrandsController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Belirli bir ID'ye sahip markayı siler",
             description = "Verilen ID'ye sahip markayı sistemden siler.")
     public void delete(

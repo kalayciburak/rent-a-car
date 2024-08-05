@@ -8,6 +8,7 @@ import com.kalayciburak.inventoryservice.service.ModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class ModelsController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Yeni bir model oluşturur",
             description = "Verilen model bilgilerine göre yeni bir model kaydı oluşturur.")
     public ResponseItem<ModelResponse> create(
@@ -66,6 +68,7 @@ public class ModelsController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Belirli bir ID'ye sahip modeli siler",
             description = "Verilen ID'ye sahip modeli sistemden siler.")
     public void delete(

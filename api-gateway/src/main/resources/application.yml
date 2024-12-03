@@ -24,3 +24,6 @@ eureka:
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
+
+loadbalancer:
+  strategy: random

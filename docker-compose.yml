@@ -52,6 +52,7 @@ services:
   graylog:
     image: graylog/graylog:6.0.4
     environment:
+      - GRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
       - GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET}
       - GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_ROOT_PASSWORD_SHA2}

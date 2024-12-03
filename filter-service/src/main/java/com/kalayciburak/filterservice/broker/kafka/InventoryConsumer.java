@@ -44,7 +44,9 @@ public class InventoryConsumer {
         filterService.onBrandDeleted(event);
         log.info("brand.deleted event: Brand ID={}", event.getId());
     }
-    
+
+    // TODO: Model, Location ve City için de update ve delete event'leri eklenecek.
+
     private void logCarDetails(Long carId, String eventType) {
         var car = filterService.findByCarId(carId);
         var message = getMessage(eventType, car.getData());
